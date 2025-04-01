@@ -1,0 +1,122 @@
+/* Basic resets & layout */
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    background: #2c3e50;
+    color: #fff;
+    padding: 10px 20px;
+    align-items: center;
+  }
+  .nav-left {
+    display: flex;
+    gap: 20px;
+  }
+  .nav-item {
+    cursor: pointer;
+    padding: 5px;
+  }
+  .nav-item.active {
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+  }
+  .nav-right button {
+    background: #3498db;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .nav-right button:hover {
+    background: #2980b9;
+  }
+  
+  /* Container for the main layout */
+  .container {
+    display: flex;
+    height: calc(100vh - 50px);
+  }
+  
+  /* Tree panel (left side) */
+  .tree-panel {
+    flex: 2;
+    padding: 20px;
+    position: relative;
+  }
+  
+  /* Upload area */
+  #upload-area {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 2px dashed #888;
+    text-align: center;
+    cursor: pointer;
+    color: #555;
+    background: #fff;
+  }
+  #upload-area:hover {
+    background: #f0f0f0;
+  }
+  
+  /* SVG styling */
+  #plan-svg {
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+  
+  /* Sidebar (right side) */
+  .sidebar {
+    flex: 1;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  /* Headings & sections in the sidebar */
+  .sidebar h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  /* Node styling */
+  .node circle {
+    stroke: #fff;
+    stroke-width: 2px;
+  }
+  .node text {
+    fill: #333;
+    font-size: 12px;
+  }
+  
+  /* Link styling */
+  .link {
+    fill: none;
+    stroke: #aaa;
+    stroke-width: 2px;
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    text-align: left;
+    padding: 8px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 12px;
+    z-index: 999;
+  }
+  
