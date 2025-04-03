@@ -1,7 +1,7 @@
 # supabase_setup.py
 from supabase import create_client
 from sentence_transformers import SentenceTransformer
-import db_config  # Contains DB_HOST and DB_ANON
+import db_config as db_config  # Contains DB_HOST and DB_ANON
 
 # Connect to Supabase
 url = db_config.DB_HOST
