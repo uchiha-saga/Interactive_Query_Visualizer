@@ -98,6 +98,14 @@ This project implements the following key components:
 └── requirements.txt         # Python dependencies
 ```
 
+## HNSW Node Traversal
+
+The code visualizes the traversal of node we search query is entered and displays the nearest neighboring node to the search query.
+
+![Screenshot 2025-04-03 at 11 09 00 AM](https://github.com/user-attachments/assets/b7d09437-5a5f-4228-a8c5-da6e5f28bfe1)
+
+![Screenshot 2025-04-03 at 11 09 36 AM](https://github.com/user-attachments/assets/6d2aa4fd-40be-4648-acab-d0a8808baa81)
+
 ## Authors
 
 - Gaurang Kamat
