@@ -38,9 +38,9 @@ A full-stack application for visualizing and exploring embeddings in vector data
 
 ### Frontend Setup
 
-1. Navigate to the client directory:
+1. Navigate to the frontend directory:
    ```
-   cd app/client
+   cd frontend
    ```
 
 2. Install dependencies:
@@ -61,16 +61,16 @@ A full-stack application for visualizing and exploring embeddings in vector data
 
 ### Start the Frontend
 
-1. In a separate terminal, navigate to the client directory:
+1. In a separate terminal, navigate to the fronted directory:
    ```
-   cd app/client
+   cd front
    ```
 
 2. Run the React development server:
    ```
-   npm start
+   python -m http.server 8000
    ```
-   The frontend will be available at http://localhost:3000
+   The frontend will be available at http://localhost:8000
 
 ## Development
 
@@ -78,23 +78,24 @@ This project implements the following key components:
 
 1. **Embedding Explorer**: Visualizes embeddings in an interactive 3D space
 2. **Query Execution Flow**: Illustrates how PostgreSQL processes vector similarity queries
-3. **Query Search Visualization**: Provides real-time query visualization
+3. **Query Search Visualization**: Provides real-time query visualization and HNSW traversal
 
 ## Project Structure
 
 ```
 .
-├── app/
-│   ├── api/                 # Backend API routes
-│   ├── client/              # React frontend
-│   │   ├── public/          # Static assets
-│   │   └── src/
-│   │       ├── components/  # React components
-│   │       └── App.js       # Main React App
-│   ├── database/            # Database connection and operations
-│   └── utils/               # Utility functions
-├── .env                     # Environment variables
-├── app.py                   # Main application entry point
+├── backend/
+│   ├── app.py               # Used to start the backend (activates the python files)
+│   ├── hnsw_index.py        # Creates our customised HNSW with Euclidean distance
+│   ├── query_execution.py   # Embeds the search query and displays in the 3D plot
+│   ├── supabase_setup.py    # Connects to the Supabase, initializes the embedding model
+                              and inserts the new embedding in the database
+│   ├── vector_ops.py        # Contains the PCA implementation and its helper functions
+│   ├── visualize.py         # Reduces the vector dimensions to 3D PCA for plotting
+├── frontend/
+│   ├── index.html           # Displays the interface and the plots
+│   ├── script.js            # Connects front-end and back-end
+│   ├── styles.css           # Customizes the front-end User interface
 └── requirements.txt         # Python dependencies
 ```
 
