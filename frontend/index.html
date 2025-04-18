@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HNSW vs ACORN-1 Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Word Search</h1>
+            <input id="word-input" type="text" placeholder="Enter word...">
+            <button id="search-btn">Search</button>
+            <div id="report"></div>
+        </div>
+        <div class="graph-row">
+            <div class="graph" id="layer-plot"></div>
+            <div class="graph" id="traversal-plot"></div>
+          </div>          
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
