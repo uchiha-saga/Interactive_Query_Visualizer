@@ -8,18 +8,53 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
+    <!-- Top Navigation -->
+    <header class="navbar">
+      <nav>
+        <ul class="nav-tabs">
+          <li><a href="#" class="tab-link active" data-tab="visualization">Visualizer</a></li>
+          <li><a href="#" class="tab-link" data-tab="summary">Summary Report</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <!-- Tab Content -->
+    <div id="tab-content">
+  
+      <!-- VISUALIZER TAB -->
+      <section id="visualization-tab" class="tab-panel active">
+        <div class="main-panel">
+          <div class="search-box">
             <h1>Word Search</h1>
             <input id="word-input" type="text" placeholder="Enter word...">
             <button id="search-btn">Search</button>
             <div id="report"></div>
-        </div>
-        <div class="graph-row">
+          </div>
+  
+          <div class="graph-panel">
             <div class="graph" id="layer-plot"></div>
             <div class="graph" id="traversal-plot"></div>
-          </div>          
+          </div>
+        </div>
+      </section>
+  
+      <!-- SUMMARY REPORT TAB -->
+      <section id="summary-tab" class="tab-panel">
+        <div class="summary-panel">
+          <h2>Summary Report</h2>
+          <div class="summary-header">
+            <button id="refresh-summary-btn">Refresh Summary</button>
+            <div id="summary-averages" class="averages-display"></div>
+          </div>
+          
+          <div id="summary-table" style="margin-top: 20px;"></div>
+        </div>
+      </section>
+      
+  
     </div>
+  
     <script src="script.js"></script>
-</body>
+  </body>
+  
 </html>

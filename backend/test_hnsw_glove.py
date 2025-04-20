@@ -4,7 +4,7 @@ import numpy as np
 from glove_loader import load_glove_embeddings
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-from hnsw_index import CompleteHNSW
+from Interactive_Query_Visualizer.backend.graphs.hnsw_index import CompleteHNSW
 from acorn1_index import ACORN1
 from sklearn.decomposition import PCA
 import plotly.graph_objects as go

@@ -89,7 +89,11 @@ document.getElementById("search-btn").onclick = async () => {
         const layerTracesPlot2 = Object.entries(allLayerPoints).map(([layer, nodes]) => ({
             type: 'scatter3d',
             mode: 'markers',
-            name: `Layer ${layer}`,
+            name: {
+                "0": "Base Layer",
+                "1": "Middle Layer",
+                "2": "Entry Layer"
+              }[layer] || `Layer ${layer}`,              
             x: nodes.map(n => n.pos[0]),
             y: nodes.map(n => n.pos[1]),
             z: nodes.map(n => n.pos[2]),
@@ -139,7 +143,11 @@ document.getElementById("search-btn").onclick = async () => {
             return {
                 type: 'scatter3d',
                 mode: 'lines+markers',
-                name: `HNSW Path (Layer ${layer})`,
+                name: `HNSW Path (${{
+                    "0": "Base Layer",
+                    "1": "Middle Layer",
+                    "2": "Entry Layer"
+                  }[layer] || `Layer ${layer}`})`,                  
                 x: pathCoords.map(c => c[0]),
                 y: pathCoords.map(c => c[1]),
                 z: pathCoords.map(c => c[2]),
@@ -164,15 +172,42 @@ document.getElementById("search-btn").onclick = async () => {
             line: { width: 3, color: 'green' }
         };
 
+        const acornRadiusTraces = [];
+
+        data.acorn.path.forEach(nodeIdx => {
+        const neighbors = data.acorn.neighbors[nodeIdx.toString()] || [];
+        const positions = neighbors.map(i => coords[i.toString()]);
+        const labelsList = neighbors.map(i => labels[i.toString()]);
+
+        acornRadiusTraces.push({
+            type: 'scatter3d',
+            mode: 'markers',
+            name: `ACORN Radius Neighbors - ${labels[nodeIdx.toString()]}`,
+            x: positions.map(p => p[0]),
+            y: positions.map(p => p[1]),
+            z: positions.map(p => p[2]),
+            text: labelsList,
+            hoverinfo: 'text',
+            marker: {
+            size: 3,
+            color: 'rgba(0, 255, 0, 0.2)', // translucent green
+            symbol: 'circle'
+            },
+            visible: 'legendonly'
+        });
+        });
+
+
         Plotly.newPlot("traversal-plot", [
             ...layerTracesPlot2,
             queryTrace,
             entryTrace,
             ...hnswLayerTraces,
-            acornTrace
+            acornTrace,
+            ...acornRadiusTraces
         ], {
             title: {
-                text: `Search Traversal for '${data.query}'`,
+                text: `Search Traversal for '${word}'`,
                 font: { family: 'Inter, sans-serif', size: 18 },
                 pad: { t: 40, b: 10 }
             },
@@ -188,17 +223,115 @@ document.getElementById("search-btn").onclick = async () => {
 
         //  Report panel
         document.getElementById("report").innerHTML = `
-            <strong>🔍 Query:</strong> ${data.query}<br><br>
+            <strong>Your Query:</strong> ${word}<br>
+
+            <strong>Closest Match in GloVe:</strong> ${data.query}<br><br>
+
             <strong>HNSW Result:</strong> ${data.hnsw.result}<br>
-            ⏱ Time: ${data.hnsw.time_ms}ms | 🔁 Steps: ${data.hnsw.num_visited} <br>
-            📐 Cosine Sim: ${data.hnsw.similarity.toFixed(4)}<br><br>
+            Time: ${data.hnsw.time_ms}ms 
+            <br>
+            Steps: ${data.hnsw.num_visited}
+            <br>
+            Cosine Similarity: ${data.hnsw.similarity.toFixed(4)}
+            <br><br>
+
             <strong>ACORN-1 Result:</strong> ${data.acorn.result}<br>
-            ⏱ Time: ${data.acorn.time_ms}ms | 🔁 Steps: ${data.acorn.num_visited}<br>
-            📐 Cosine Sim: ${data.acorn.similarity.toFixed(4)}
+            Time: ${data.acorn.time_ms}ms  
+            <br>
+            Steps: ${data.acorn.num_visited}
+            <br>
+            Cosine Similarity: ${data.acorn.similarity.toFixed(4)}
+            <br>
         `;
+
+        // 🧠 Tab Switching Logic
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+            e.preventDefault();
+        
+            const tab = link.getAttribute('data-tab');
+        
+            document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById(`${tab}-tab`).classList.add('active');
+            });
+        });
+          
+
 
     } catch (err) {
         console.error("Error occurred:", err);
-        document.getElementById("report").innerHTML = `<span style="color:red;">❌ Error: ${err.message}</span>`;
+        document.getElementById("report").innerHTML = `<span style="color:red;"> Error: ${err.message}</span>`;
     }
-};
+}
+
+// ============================
+// 📋 Summary Report Loader
+// ============================
+
+async function loadSummary() {
+    try {
+      const res = await fetch("/summary");
+      const summary = await res.json();
+  
+      let html = `<table>
+        <tr>
+          <th>Word</th>
+          <th>HNSW Time</th><th>HNSW Steps</th><th>HNSW Cosine Similarity</th>
+          <th>ACORN Time</th><th>ACORN Steps</th><th>ACORN Cosine Similarity</th>
+        </tr>`;
+  
+      let total = { h_time: 0, h_steps: 0, h_sim: 0, a_time: 0, a_steps: 0, a_sim: 0 };
+  
+      summary.forEach(row => {
+        html += `<tr>
+          <td>${row.word}</td>
+          <td>${row.hnsw.time_ms} ms</td><td>${row.hnsw.steps}</td><td>${row.hnsw.sim}</td>
+          <td>${row.acorn.time_ms} ms</td><td>${row.acorn.steps}</td><td>${row.acorn.sim}</td>
+        </tr>`;
+  
+        total.h_time += row.hnsw.time_ms;
+        total.h_steps += row.hnsw.steps;
+        total.h_sim += row.hnsw.sim;
+        total.a_time += row.acorn.time_ms;
+        total.a_steps += row.acorn.steps;
+        total.a_sim += row.acorn.sim;
+      });
+  
+      const count = summary.length;
+      const avgRow = `
+        <tr style="font-weight: bold;">
+          <td>Average</td>
+          <td>${(total.h_time / count).toFixed(2)} ms</td>
+          <td>${(total.h_steps / count).toFixed(2)}</td>
+          <td>${(total.h_sim / count).toFixed(4)}</td>
+          <td>${(total.a_time / count).toFixed(2)} ms</td>
+          <td>${(total.a_steps / count).toFixed(2)}</td>
+          <td>${(total.a_sim / count).toFixed(4)}</td>
+        </tr>`;
+  
+      html += avgRow;
+      document.getElementById("summary-table").innerHTML = html;
+  
+      // 👆 Show averages above table
+      const avgText = `
+        <strong> Averages:</strong><br>
+        HNSW: ${ (total.h_time / count).toFixed(2) } ms, ${ (total.h_steps / count).toFixed(2) } steps, Sim ${ (total.h_sim / count).toFixed(4) }<br>
+        ACORN-1: ${ (total.a_time / count).toFixed(2) } ms, ${ (total.a_steps / count).toFixed(2) } steps, Sim ${ (total.a_sim / count).toFixed(4) }
+      `;
+      document.getElementById("summary-averages").innerHTML = avgText;
+  
+    } catch (err) {
+      document.getElementById("summary-table").innerHTML = `<p style="color:red;">Error loading summary: ${err.message}</p>`;
+    }
+  }
+  
+
+  
+  document.getElementById("refresh-summary-btn").addEventListener("click", () => {
+    loadSummary();
+  });
+  
+  
