@@ -8,12 +8,13 @@ For testing purpose, we have implemented ACORN-1 to analyse its traversal and re
 
 ## Conceptual differenced between HNSW and ACORN-1
 
-# Feature | HNSW (Hierarchical) | ACORN-1 (Flat Refinement)
-Structure | Multi-layer, graph-based index | Flat graph with radius-based local refinement
-Traversal | Top-down greedy search (Entry → Middle → Base Layer) | Starts from same entry point, traverses via radius
-Graph Design | KNN links built in each layer | Augments HNSW's base layer with radius neighbors
-Efficiency | Fast and scalable, may miss close neighbors | Slightly slower per step, improves local accuracy
-Use Case | Large-scale search with logarithmic complexity | Local refinement where precision matters
+| Feature        | HNSW (Hierarchical)                                   | ACORN-1 (Flat Refinement)                              |
+|----------------|--------------------------------------------------------|--------------------------------------------------------|
+| Structure      | Multi-layer, graph-based index                         | Flat graph with radius-based local refinement          |
+| Traversal      | Top-down greedy search (Entry → Middle → Base Layer)  | Starts from same entry point, traverses via radius     |
+| Graph Design   | KNN links built in each layer                          | Augments HNSW's base layer with radius neighbors       |
+| Efficiency     | Fast and scalable, may miss close neighbors            | Slightly slower per step, improves local accuracy      |
+| Use Case       | Large-scale search with logarithmic complexity         | Local refinement where precision matters               |
 
 ## Features
 
@@ -93,11 +94,14 @@ python app.py
 nearest neighbor search using hierarchical navigable small world graphs,”
 IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 42,
 no. 4, pp. 824–836, 2018.
+
 [2] J. Pennington, R. Socher, and C. D. Manning, “Glove: Global vectors for
 word representation,” in Proceedings of the 2014 conference on empirical
 methods in natural language processing (EMNLP), 2014, pp. 1532–1543.
+
 [3] I. T. Jolliffe, “Principal component analysis,” Springer Series in Statistics,
 vol. 2, no. 3, pp. 487–488, 2002.
+
 [4] L. Patel, P. Kraft, C. Guestrin, and M. Zaharia, “Acorn: Performant and
 predicate-agnostic search over vector embeddings and structured data,”
 Proceedings of the ACM on Management of Data, vol. 2, no. 3, pp. 1–
