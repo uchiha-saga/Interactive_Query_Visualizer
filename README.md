@@ -6,7 +6,7 @@ An interactive 3D web application that visualizes and compares search traversals
    <img src="docs/assets/HNSW vs ACORN-1 visualization.jpg" width="650" alt="HNSW vs ACORN-1 search traversal"/>
 </p>
 
-The idea of this web application is to help developers analyse their modified algorithms fir the results of the search query and if the performance and the results of the search query is better than the original HNSW.
+The idea of this web application is to help developers analyse their modified algorithms for the results of the search query and if the performance and the results of the search query is better than the original HNSW.
 
 For testing purpose, we have implemented ACORN-1 to analyse its traversal and results with the original HNSW algorithm.
 
