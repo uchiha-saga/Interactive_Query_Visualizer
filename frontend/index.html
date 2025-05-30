@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HNSW vs ACORN-1 Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="navbar">
+      <nav>
+        <ul class="nav-tabs">
+          <li><a href="#" class="tab-link active" data-tab="visualization">Visualizer</a></li>
+          <li><a href="#" class="tab-link" data-tab="summary">Summary Report</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <!-- Tab Content -->
+    <div id="tab-content">
+  
+      <!-- VISUALIZER TAB -->
+      <section id="visualization-tab" class="tab-panel active">
+        <div class="main-panel">
+          <div class="search-box">
+            <h1>Word Search</h1>
+            <input id="word-input" type="text" placeholder="Enter word...">
+            <button id="search-btn">Search</button>
+            <div id="report"></div>
+          </div>
+  
+          <div class="graph-panel">
+            <div class="graph" id="layer-plot"></div>
+            <div class="graph" id="traversal-plot"></div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- SUMMARY REPORT TAB -->
+      <section id="summary-tab" class="tab-panel">
+        <div class="summary-panel">
+          <h2>Summary Report</h2>
+          <div class="summary-header">
+            <button id="refresh-summary-btn">Refresh Summary</button>
+            <div id="summary-averages" class="averages-display"></div>
+          </div>
+          
+          <div id="summary-table" style="margin-top: 20px;"></div>
+        </div>
+      </section>
+      
+  
+    </div>
+
+    <!-- <div id="pca-popup" class="pca-popup hidden">
+        <h3>PCA Dimensionality Info</h3>
+        <p><strong>Retained Variance:</strong> <span id="pca-retained">-</span>%</p>
+        <p><strong>Data Loss:</strong> <span id="pca-loss">-</span>%</p>
+        <p><em>(3D PCA from original 100D space)</em></p>
+      </div> -->
+      
+  
+    <script src="script.js"></script>
+  </body>
+  
+</html>

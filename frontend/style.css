@@ -1,0 +1,338 @@
+/* ============ Global Aesthetic Enhancements ============ */
+body {
+  background: linear-gradient(to right, #eef2f3, #ffffff);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  color: #333;
+}
+
+/* ============ Navigation Bar ============ */
+.navbar {
+  background: linear-gradient(to right, #16222A, #3A6073);
+  padding: 16px 30px;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-tabs li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.3s;
+}
+
+.nav-tabs li a.active {
+  background-color: #fff;
+  color: #333;
+}
+
+/* ============ Layout ============ */
+.tab-panel {
+  display: none;
+  padding: 20px;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.main-panel {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+/* ============ Search Box ============ */
+.search-box {
+  width: 300px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
+}
+
+.search-box:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.search-box h1 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.search-box input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.search-box button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background 0.3s;
+}
+
+.search-box button:hover {
+  background: linear-gradient(to right, #4b79a1, #283e51);
+  transform: translateY(-1px);
+}
+
+/* ============ Report Panel ============ */
+.report-panel {
+  font-size: 14px;
+  margin-top: 20px;
+  line-height: 1.6;
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+#report {
+  max-height: calc(100vh - 180px); /* Keeps room for header and graphs */
+  overflow-y: auto;
+  padding-right: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Optional: for better scrollbar appearance */
+#report::-webkit-scrollbar {
+  width: 6px;
+}
+
+#report::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+#report::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* ============ Graph Panel ============ */
+.graph-panel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.graph {
+  flex: 1;
+  height: 100%;
+}
+
+/* ============ Summary Panel ============ */
+.summary-panel {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  padding: 30px;
+  transition: all 0.3s ease;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.summary-panel:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.summary-panel h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+/* ============ Summary Table ============ */
+#summary-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+#summary-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+}
+
+#summary-table th,
+#summary-table td {
+  padding: 10px 14px;
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+#summary-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+  color: #444;
+}
+
+#summary-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+#summary-table tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* ============ Button Consistency ============ */
+.summary-panel button,
+#summary-btn {
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.summary-panel button:hover,
+#summary-btn:hover {
+  background: linear-gradient(to right, #4b79a1, #283e51);
+  transform: translateY(-1px);
+}
+
+/* ============ Summary Averages Box ============ */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.avg-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.avg-table th,
+.avg-table td {
+  padding: 10px 14px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.avg-table th {
+  background-color: #f0f0f0;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.avg-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+.widget-card {
+  background: linear-gradient(to right, #f6f9fc, #edf3f9);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 14px;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+
+.widget-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.hnsw-widget {
+  border-left: 4px solid #2f75ff;
+}
+
+.acorn-widget {
+  border-left: 4px solid #4caf50;
+}
+
+.path-labels {
+  font-family: monospace;
+  font-size: 13px;
+  background: #f0f3f8;
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 6px;
+  word-break: break-word;
+}
+
+
+.pca-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #fefefe, #f3f6fa);
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  z-index: 1000;
+  max-width: 280px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #3367d6;
+}
+
+.pca-popup h3 {
+  margin-top: 0;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.pca-popup.hidden {
+  display: none;
+}
+
